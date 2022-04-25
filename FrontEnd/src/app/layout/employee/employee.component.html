@@ -1,0 +1,210 @@
+<div class="limiter">
+
+  <div class="container-table100">
+    <div class="wrap-table100">
+      <div class="table100 ver1 m-b-110">
+        <div class="table100-head">
+          <table>
+            <thead>
+              <tr class="row100 head">
+                <th class="cell100 column1">Cedula</th>
+                <th class="cell100 column2">Nombres</th>
+                <th class="cell100 column3">Apellidos</th>
+                <th class="cell100 column4">Correo</th>
+                <th class="cell100 column5">Estado Vacuna</th>
+                <th class="cell100 column6">Tipo Vacuna</th>
+                <th class="cell100 column7">Dosis</th>
+                <th class="cell100 column8"></th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+
+        <div class="table100-body js-pscroll">
+          <table>
+            <tbody>
+              <tr class="row100 body">
+                <td class="cell100 column1">{{user.cedula}}</td>
+                <td class="cell100 column2">{{user.nombres}}</td>
+                <td class="cell100 column3">{{user.apellidos}}</td>
+                <td class="cell100 column4">{{user.email}}</td>
+                <td class="cell100 column5">{{user.estado_vacunacion}}</td>
+                <td class="cell100 column6">{{user.tipo_vacuna}}</td>
+                <td class="cell100 column7">{{user.dosis}}</td>
+                <td class="cell100 column8">
+                  <fa-icon (click)="actualizar(user)" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    style="color:rgb(60, 60, 245);" [icon]="faUpdate"></fa-icon>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">USUARIO</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="userForm" class="login100-form validate-form">
+          <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+
+            <div class="input-group">
+              <span class="input-group-text">Cedula</span>
+              <input class="input100" type="text" formControlName="cedula" minlength="10" name="cedula"
+                [(ngModel)]="user.cedula" autocomplete="off" name="cedula" placeholder="Cedula">
+            </div>
+            <div *ngIf="cedula?.invalid && (cedula?.dirty || cedula?.touched)" class="alert-danger">
+
+              <div *ngIf="cedula?.errors?.['required']">
+                La cedula es requerida
+              </div>
+              <div *ngIf="cedula?.errors?.['pattern']">
+                La cedula debe tener 10 digitos y solo deben ser numeros
+              </div>
+
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-text">Nombres</span>
+              <input class="input100" type="text" formControlName="nombres" minlength="10" name="nombres"
+                [(ngModel)]="user.nombres" autocomplete="off" name="nombres" placeholder="Nombres">
+            </div>
+            <div *ngIf="nombres?.invalid && (nombres?.dirty || nombres?.touched)" class="alert-danger">
+
+              <div *ngIf="nombres?.errors?.['required']">
+                Los nombres son requeridos
+              </div>
+              <div *ngIf="nombres?.errors?.['pattern']">
+                Los nombres no deben contener caracteres especiales
+              </div>
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-text">Apellidos</span>
+              <input class="input100" type="text" formControlName="apellidos" minlength="10" name="apellidos"
+                [(ngModel)]="user.apellidos" autocomplete="off" name="apellidos" placeholder="Apellidos">
+            </div>
+            <div *ngIf="apellidos?.invalid && (apellidos?.dirty || apellidos?.touched)" class="alert-danger">
+
+              <div *ngIf="apellidos?.errors?.['required']">
+                Los apellidos son requeridos
+              </div>
+              <div *ngIf="apellidos?.errors?.['pattern']">
+                Los apellidos no deben contener caracteres especiales o numeros
+              </div>
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-text">Correo Electronico</span>
+              <input class="input100" type="text" formControlName="emailForm" name="emailForm" [(ngModel)]="user.email"
+                autocomplete="off" name="email" placeholder="Email">
+            </div>
+
+            <div *ngIf="emailForm?.invalid && (emailForm?.dirty || emailForm?.touched)" class="alert-danger">
+              <div *ngIf="emailForm?.errors?.['required']">
+                El correo es requerido
+              </div>
+              <div *ngIf="emailForm?.errors?.['pattern']">
+                El valor que ingresaste no es un email
+              </div>
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-text">Fecha de Nacimiento</span>
+              <input class="input100" type="text" formControlName="birthday" name="birthday"
+                [(ngModel)]="user.fecha_nacimiento" autocomplete="off" name="birthday" placeholder="Email">
+            </div>
+
+            <div *ngIf="birthday?.invalid && (birthday?.dirty || birthday?.touched)" class="alert-danger">
+              <div *ngIf="birthday?.errors?.['required']">
+                La fecha de nacimiento es requerida
+              </div>
+            </div>
+
+            <br>
+            <div class="input-group">
+              <span class="input-group-text">Direccion</span>
+              <input class="input100" type="text" formControlName="direccion" name="direccion"
+                [(ngModel)]="user.direccion" autocomplete="off" name="direccion" placeholder="Direccion">
+            </div>
+
+            <div *ngIf="direccion?.invalid && (direccion?.dirty || direccion?.touched)" class="alert-danger">
+              <div *ngIf="direccion?.errors?.['required']">
+                La direccion es requerida
+              </div>
+            </div>
+
+            <br>
+            <div class="input-group">
+              <span class="input-group-text">Telefono</span>
+              <input class="input100" type="text" formControlName="telefono" name="telefono" [(ngModel)]="user.telefono"
+                autocomplete="off" name="telefono" placeholder="telefono">
+            </div>
+
+            <div *ngIf="telefono?.invalid && (telefono?.dirty || telefono?.touched)" class="alert-danger">
+              <div *ngIf="telefono?.errors?.['required']">
+                El telefono es requerido
+              </div>
+            </div>
+
+            <br>
+            <div class="input-group">
+              <span class="input-group-text">Estado Vacuna</span>
+              <select class="form-select" [(ngModel)]="user.estado_vacunacion" (change)="hideData()"
+                formControlName="estadovacuna" name="estadovacuna" aria-label="Default select example">
+                <option value="No Vacunado">No Vacunado </option>
+                <option value="Vacunado">Vacunado</option>
+              </select>
+            </div>
+            <br>
+            <div class="input-group" *ngIf="showData">
+              <span class="input-group-text">Tipo de Vacuna</span>
+              <select class="form-select" [(ngModel)]="user.tipo_vacuna" formControlName="tipovacuna" name="tipovacuna"
+                aria-label="Default select example">
+                <option *ngFor="let vaccine of vaccines" value="{{vaccine.nombre}}">{{vaccine.nombre}} </option>
+              </select>
+            </div>
+            <br>
+            <div class="input-group" *ngIf="showData">
+              <span class="input-group-text">Fecha de Vacunacion</span>
+              <input class="input100" type="text" formControlName="fechavacuna" [(ngModel)]="user.fecha_vacuna"
+                autocomplete="off" name="fechavacuna" placeholder="fechavacuna">
+            </div>
+
+            <div *ngIf="fechavacuna?.invalid && (fechavacuna?.dirty || fechavacuna?.touched)" class="alert-danger">
+              <div *ngIf="fechavacuna?.errors?.['required']">
+                La fecha de vacunacion es requerida
+              </div>
+            </div>
+
+
+            <br>
+            <div class="input-group" *ngIf="showData">
+              <span class="input-group-text">Dosis</span>
+              <input class="input100" type="text" formControlName="dosis" name="dosis" [(ngModel)]="user.dosis"
+                autocomplete="off" name="dosis" placeholder="dosis">
+            </div>
+
+            <div *ngIf="dosis?.invalid && (dosis?.dirty || dosis?.touched)" class="alert-danger">
+              <div *ngIf="dosis?.errors?.['required']">
+                La dosis es requerida
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="update()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

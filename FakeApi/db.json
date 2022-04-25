@@ -1,0 +1,73 @@
+{
+  "users": [
+    {
+      "email": "admin2021@gmail.com",
+      "password": "$2a$10$ZhxmiG0DpYwkiraQAXMrMOsonqpJh7OCukm/6.tKLPrj/IS/KQFSi",
+      "id": 1,
+      "cedula": "0000000000",
+      "nombres": "Admin",
+      "apellidos": "Admin",
+      "fecha_nacimiento": "",
+      "direccion": "",
+      "telefono": "",
+      "estado_vacunacion": "No Vacunado",
+      "tipo_vacuna": "",
+      "fecha_vacuna": "",
+      "dosis": "",
+      "age": 32,
+      "roleId": 1
+    },
+    {
+      "email": "erickerraez2@gmail.com",
+      "password": "$2a$10$DMdUJVu4DlR1bwIJtWhuDeHAIj8B.Z5NLI8418ZATpw57gaD8kTp2",
+      "id": 2,
+      "cedula": "1725875296",
+      "nombres": "Erick Daniel",
+      "apellidos": "Erraez Guaman",
+      "fecha_nacimiento": "11/12/1999",
+      "direccion": "Nueva Aurora",
+      "telefono": "0987178106",
+      "estado_vacunacion": "Vacunado",
+      "tipo_vacuna": "Sputnik",
+      "fecha_vacuna": "17/02/2022",
+      "dosis": 3,
+      "age": 22,
+      "roleId": 2,
+      "role": {
+        "id": 2,
+        "nombre": "employee",
+        "descripcion": "update information employee"
+      }
+    }
+  ],
+  "roles": [
+    {
+      "id": 1,
+      "nombre": "administrator",
+      "descripcion": "all access of aplication"
+    },
+    {
+      "id": 2,
+      "nombre": "employee",
+      "descripcion": "update information employee"
+    }
+  ],
+  "vacunas": [
+    {
+      "id": 1,
+      "nombre": "Sputnik"
+    },
+    {
+      "id": 2,
+      "nombre": "AstraZeneca"
+    },
+    {
+      "id": 3,
+      "nombre": "Pfizer"
+    },
+    {
+      "id": 4,
+      "nombre": "Jhonson&Jhonson"
+    }
+  ]
+}

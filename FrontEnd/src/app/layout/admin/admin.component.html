@@ -1,0 +1,187 @@
+<div class="limiter">
+
+  <div class="container-table100">
+    <div class="wrap-table100">
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Crear</button>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#filtros">Filtros</button>
+      <div class="table100 ver1 m-b-110">
+        <div class="table100-head">
+          <table>
+            <thead>
+              <tr class="row100 head">
+                <th class="cell100 column1">Cedula</th>
+                <th class="cell100 column2">Nombres</th>
+                <th class="cell100 column3">Apellidos</th>
+                <th class="cell100 column4">Correo</th>
+                <th class="cell100 column5">Estado Vacuna</th>
+                <th class="cell100 column6">Tipo Vacuna</th>
+                <th class="cell100 column7">Dosis</th>
+                <th class="cell100 column8"></th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+
+        <div class="table100-body js-pscroll">
+          <table>
+            <tbody>
+              <tr *ngFor="let user of users" class="row100 body">
+                <td class="cell100 column1">{{user.cedula}}</td>
+                <td class="cell100 column2">{{user.nombres}}</td>
+                <td class="cell100 column3">{{user.apellidos}}</td>
+                <td class="cell100 column4">{{user.email}}</td>
+                <td class="cell100 column5">{{user.estado_vacunacion}}</td>
+                <td class="cell100 column6">{{user.tipo_vacuna}}</td>
+                <td class="cell100 column7">{{user.dosis}}</td>
+                <td class="cell100 column8">
+                  <fa-icon (click)="actualizar(user)" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    style="color:rgb(60, 60, 245);" [icon]="faUpdate"></fa-icon>
+                  &nbsp;
+                  <fa-icon (click)="eliminar(user.id)" style="color:rgb(255, 38, 38);" [icon]="faDelete"></fa-icon>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">USUARIO</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="userForm" class="login100-form validate-form">
+          <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+
+            <div class="input-group">
+              <span class="input-group-text">Cedula</span>
+              <input class="input100" type="text" formControlName="cedula" minlength="10" name="cedula"
+                [(ngModel)]="user.cedula" autocomplete="off" name="cedula" placeholder="Cedula">
+            </div>
+            <div *ngIf="cedula?.invalid && (cedula?.dirty || cedula?.touched)" class="alert-danger">
+
+              <div *ngIf="cedula?.errors?.['required']">
+                La cedula es requerida
+              </div>
+              <div *ngIf="cedula?.errors?.['pattern']">
+                La cedula debe tener 10 digitos y solo deben ser numeros
+              </div>
+
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-text">Nombres</span>
+              <input class="input100" type="text" formControlName="nombres" minlength="10" name="nombres"
+                [(ngModel)]="user.nombres" autocomplete="off" name="nombres" placeholder="Nombres">
+            </div>
+            <div *ngIf="nombres?.invalid && (nombres?.dirty || nombres?.touched)" class="alert-danger">
+
+              <div *ngIf="nombres?.errors?.['required']">
+                Los nombres son requeridos
+              </div>
+              <div *ngIf="nombres?.errors?.['pattern']">
+                Los nombres no deben contener caracteres especiales
+              </div>
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-text">Apellidos</span>
+              <input class="input100" type="text" formControlName="apellidos" minlength="10" name="apellidos"
+                [(ngModel)]="user.apellidos" autocomplete="off" name="apellidos" placeholder="Apellidos">
+            </div>
+            <div *ngIf="apellidos?.invalid && (apellidos?.dirty || apellidos?.touched)" class="alert-danger">
+
+              <div *ngIf="apellidos?.errors?.['required']">
+                Los apellidos son requeridos
+              </div>
+              <div *ngIf="apellidos?.errors?.['pattern']">
+                Los apellidos no deben contener caracteres especiales o numeros
+              </div>
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-text">Correo Electronico</span>
+              <input class="input100" type="text" formControlName="emailForm" name="emailForm" [(ngModel)]="user.email"
+                autocomplete="off" name="email" placeholder="Email">
+            </div>
+
+            <div *ngIf="emailForm?.invalid && (emailForm?.dirty || emailForm?.touched)" class="alert-danger">
+              <div *ngIf="emailForm?.errors?.['required']">
+                El correo es requerido
+              </div>
+              <div *ngIf="emailForm?.errors?.['pattern']">
+                El valor que ingresaste no es un email
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()" data-bs-dismiss="modal">Cerrar</button>
+        <button *ngIf="!user.id" type="button" class="btn btn-primary" (click)="create()">Guardar</button>
+        <button *ngIf="user.id" type="button" class="btn btn-primary" (click)="update()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="filtros" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">FILTROS</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="login100-form validate-form">
+          <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+
+            <div class="input-group">
+              <span class="input-group-text">Fecha de Inicio</span>
+              <input class="input100" type="date" name="date" [value]="" min="2015-01-01" [(ngModel)]="fechaInicio"
+                autocomplete="off" name="cedula" placeholder="Fecha inicial">
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-text">Fecha de Fin</span>
+              <input class="input100" type="date" [value]="fechaInicio" min="2015-01-01" name="date"
+                [(ngModel)]="fechaFin" autocomplete="off" name="cedula" placeholder="Fecha Final">
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-text">Estado Vacuna</span>
+              <select class="form-select" [(ngModel)]="estadoVacuna" name="estadoVacuna"
+                aria-label="Default select example">
+                <option value="No Vacunado" selected>No Vacunado</option>
+                <option value="Vacunado">Vacunado</option>
+              </select>
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-text">Tipo de Vacuna</span>
+              <select class="form-select" [(ngModel)]="tipoVacuna" name="tipoVacuna"
+                aria-label="Default select example">
+                <option *ngFor="let vaccine of vaccines" value="{{vaccine.nombre}}">{{vaccine.nombre}}</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="buscar()">BUSCAR</button>
+      </div>
+    </div>
+  </div>
+</div>

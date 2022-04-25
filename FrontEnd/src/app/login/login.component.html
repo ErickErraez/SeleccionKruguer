@@ -1,0 +1,52 @@
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100">
+      <div class="login100-pic js-tilt" data-tilt>
+        <img src="assets/images/img-01.png" alt="IMG">
+      </div>
+
+      <form [formGroup]="loginForm" class="login100-form validate-form">
+        <span class="login100-form-title">
+          Member Login
+        </span>
+
+        <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+          <input class="input100" type="text" formControlName="emailForm" name="emailForm" [(ngModel)]="user.email"
+            autocomplete="off" name="email" placeholder="Email">
+          <span class="focus-input100"></span>
+          <span class="symbol-input100">
+            <fa-icon [icon]="faEnvelope"></fa-icon>
+          </span>
+          <div *ngIf="emailForm?.invalid && (emailForm?.dirty || emailForm?.touched)" class="alert-danger">
+            <div *ngIf="emailForm?.errors?.['required']">
+              El correo es requerido
+            </div>
+            <div *ngIf="emailForm?.errors?.['pattern']">
+              El valor que ingresaste no es un email
+            </div>
+          </div>
+        </div>
+
+        <div class="wrap-input100 validate-input" data-validate="Password is required">
+          <input class="input100" type="password" formControlName="passwordForm" name="passwordForm"
+            [(ngModel)]="user.password" autocomplete="off" name="pass" placeholder="Password">
+          <span class="focus-input100"></span>
+          <span class="symbol-input100">
+            <fa-icon [icon]="faLock"></fa-icon>
+          </span>
+          <div *ngIf="passwordForm?.invalid && (passwordForm?.dirty || passwordForm?.touched)" class="alert-danger">
+            <div *ngIf="passwordForm?.errors?.['required']">
+              La contraseña es requerida
+            </div>
+          </div>
+        </div>
+
+        <div class="container-login100-form-btn">
+          <button class="login100-form-btn" [disabled]="loginForm.invalid" (click)="doLogin()">
+            Login
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
