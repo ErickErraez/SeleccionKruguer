@@ -149,13 +149,13 @@
 
             <div class="input-group">
               <span class="input-group-text">Fecha de Inicio</span>
-              <input class="input100" type="date" name="date" [value]="" min="2015-01-01" [(ngModel)]="fechaInicio"
-                autocomplete="off" name="cedula" placeholder="Fecha inicial">
+              <input class="input100" type="date"  [value]="fechaInicio" min="2015-01-01" [(ngModel)]="fechaInicio"
+                autocomplete="off" name="fechaInicio" placeholder="Fecha inicial">
             </div>
             <br>
             <div class="input-group">
               <span class="input-group-text">Fecha de Fin</span>
-              <input class="input100" type="date" [value]="fechaInicio" min="2015-01-01" name="date"
+              <input class="input100" type="date" [value]="fechaFin" min="2015-01-01" name="fechaFin"
                 [(ngModel)]="fechaFin" autocomplete="off" name="cedula" placeholder="Fecha Final">
             </div>
             <br>

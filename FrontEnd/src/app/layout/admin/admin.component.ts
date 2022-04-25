@@ -128,7 +128,7 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  buscar() {
+  async buscar() {
     let filtros = ``;
     if (this.estadoVacuna) {
       filtros += `&estado_vacunacion=${this.estadoVacuna}`;
@@ -138,18 +138,17 @@ export class AdminComponent implements OnInit {
     }
     this.fechaInicio = this.formato(this.fechaInicio);
     this.fechaFin = this.formato(this.fechaFin);
-    console.log(filtros);
-    this.userServices.getUsersByFilter(filtros).subscribe(
+    await this.userServices.getUsersByFilter(filtros).subscribe(
       (result: any) => {
         result = result.filter(
           (n: any) =>
             n.fecha_vacuna > this.fechaInicio && n.fecha_vacuna < this.fechaFin
         );
+        this.users = result;
         $('#filtros').modal('hide');
         $('.modal-backdrop').remove();
         this.fechaInicio = new Date().toISOString().split('T')[0];
         this.fechaFin = new Date().toISOString().split('T')[0];
-        this.users = result;
       },
       (error: any) => {
         alert('No se pudo eliminar el registro');

@@ -38,6 +38,16 @@
         "nombre": "employee",
         "descripcion": "update information employee"
       }
+    },
+    {
+      "email": "prueba@gmail.com",
+      "password": "$2a$10$149YE6aLTYzFfU4FJgsleuunZhjYS2zs7sEZxFlo3N2hjW0GLZ5YC",
+      "roles": {},
+      "cedula": "1010623024",
+      "nombres": "Erick ",
+      "apellidos": "Erraez",
+      "roleId": 2,
+      "id": 46
     }
   ],
   "roles": [
